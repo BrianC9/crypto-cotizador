@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Formulario from './components/Formulario';
 import imgPortada from './img/imagen-criptos.png';
 const Contenedor = styled.div`
   max-width: 900px;
@@ -37,6 +38,7 @@ function App() {
       <ImagenPortada src={imgPortada} alt={'Imagen criptomonedas'} />
       <div>
         <Heading>Cotizador de Criptomonedas</Heading>
+        <Formulario />
       </div>
     </Contenedor>
   );

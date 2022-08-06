@@ -4,8 +4,7 @@ Comprueba el precio de una criptomoneda, seleccionando el tipo de moneda y cript
 
 <!-- ### [Desplegado con Vercel 👈👈👈](https://control-presupuesto-kappa.vercel.app/) -->
 
-Con este proyecto lo que se pretende entender es el uso de una llamada asíncrona a un API externa.
-Mediante el uso de un formulario para seleccionar: 1. La moneda oficial en la que deseamos ver su precio (USD, USX, EUR, etc). 2. La criptomoneda (BTC, ETH, SOL, etc) de la cual quieres conocer el precio actual, maximo diario, semanal.
+Con este proyecto lo que se pretende entender es el uso de una llamada asíncrona a un API externa mediante el uso de un formulario para seleccionar: 1. La moneda oficial en la que deseamos ver su precio (USD, USX, EUR, etc). 2. La criptomoneda (BTC, ETH, SOL, etc) de la cual quieres conocer el precio actual, maximo diario, semanal.
 Como herramienta adicional, utilizaré styled components para el diseño de la UI.
 
 ## Retos y funcionalidades a tener en cuenta
