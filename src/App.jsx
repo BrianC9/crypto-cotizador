@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 import Formulario from './components/Formulario';
+import { getCurrentTradingPrice } from './data/services';
 import imgPortada from './img/imagen-criptos.png';
 const Contenedor = styled.div`
   max-width: 900px;
@@ -33,12 +35,24 @@ const Heading = styled.h1`
   }
 `;
 function App() {
+  const [monedasConsulta, setMonedasConsulta] = useState({});
+  useEffect(() => {
+    if (Object.keys(monedasConsulta).length > 0) {
+      const { monedaSeleccionada: moneda, criptoSeleccionada: cripto } =
+        monedasConsulta;
+      getCurrentTradingPrice(cripto, moneda)
+        .then((data) => console.log(data.DISPLAY[cripto][moneda]))
+        .catch((error) =>
+          console.error('Error en el uso de getCurrentTradingPrice', error)
+        );
+    }
+  }, [monedasConsulta]);
   return (
     <Contenedor>
       <ImagenPortada src={imgPortada} alt={'Imagen criptomonedas'} />
       <div>
         <Heading>Cotizador de Criptomonedas</Heading>
-        <Formulario />
+        <Formulario setMonedasConsulta={setMonedasConsulta} />
       </div>
     </Contenedor>
   );

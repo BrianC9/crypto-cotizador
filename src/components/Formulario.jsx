@@ -23,7 +23,7 @@ const InputSubmit = styled.input`
   }
 `;
 
-function Formulario() {
+function Formulario({ setMonedasConsulta }) {
   const [criptos, setCriptos] = useState(
     localStorage.getItem('coleccionCriptos')
       ? JSON.parse(localStorage.getItem('coleccionCriptos'))
@@ -57,26 +57,30 @@ function Formulario() {
       }, 3333);
       return;
     }
-    console.log(monedaSeleccionada, criptoSeleccionada);
+    setMonedasConsulta({ monedaSeleccionada, criptoSeleccionada });
   };
   useEffect(() => {
     if (!localStorage.getItem('coleccionCriptos')) {
       let coleccionCriptos;
-      getTopListByMarketCap().then((data) => {
-        coleccionCriptos = data.Data.map((cripto) => {
-          return {
-            id: cripto.CoinInfo.Name,
-            nombre: cripto.CoinInfo.FullName,
-            simbolo: cripto.DISPLAY?.USD?.FROMSYMBOL ?? '©',
-          };
-        });
+      getTopListByMarketCap()
+        .then((data) => {
+          coleccionCriptos = data.Data.map((cripto) => {
+            return {
+              id: cripto.CoinInfo.Name,
+              nombre: cripto.CoinInfo.FullName,
+              simbolo: cripto.DISPLAY?.USD?.FROMSYMBOL ?? '©',
+            };
+          });
 
-        setCriptos(coleccionCriptos);
-        localStorage.setItem(
-          'coleccionCriptos',
-          JSON.stringify(coleccionCriptos)
+          setCriptos(coleccionCriptos);
+          localStorage.setItem(
+            'coleccionCriptos',
+            JSON.stringify(coleccionCriptos)
+          );
+        })
+        .catch((error) =>
+          console.error('Error en el uso de getTopListByMarketCap', error)
         );
-      });
     }
   }, []);
   return (
