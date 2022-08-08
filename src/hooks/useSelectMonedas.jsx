@@ -26,7 +26,7 @@ function useSelectMonedas(texto, coleccionMonedas) {
         <option value={''}>Selecciona una moneda</option>
         {coleccionMonedas.map((moneda) => (
           <option key={moneda.id} value={moneda.id}>
-            {moneda.nombre}
+            {`${moneda.nombre} - ${moneda.simbolo}`}
           </option>
         ))}
       </Select>
