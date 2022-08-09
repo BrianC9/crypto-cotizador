@@ -1,29 +1,34 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import Formulario from './components/Formulario';
+import Resultado from './components/Resultado';
 import { getCurrentTradingPrice } from './data/services';
 import imgPortada from './img/imagen-criptos.png';
 const Contenedor = styled.div`
   max-width: 900px;
-  margin: 0 auto;
+  margin: auto auto;
   width: 90%;
-  @media (min-width: 992px) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 2rem;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  padding-top: 50px;
+  gap: 100px;
+  @media (max-width: 450px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 const ImagenPortada = styled.img`
   max-width: 400px;
   width: 80%;
-  margin: 100px auto 0 auto;
+
   display: block;
 `;
 const Heading = styled.h1`
   color: white;
   font-family: 'lato';
   font-weight: 700;
-  margin: 100px 50px;
   text-align: center;
   &::after {
     content: '';
@@ -36,25 +41,31 @@ const Heading = styled.h1`
 `;
 function App() {
   const [monedasConsulta, setMonedasConsulta] = useState({});
+  const [resultado, setResultado] = useState({});
   useEffect(() => {
     if (Object.keys(monedasConsulta).length > 0) {
       const { monedaSeleccionada: moneda, criptoSeleccionada: cripto } =
         monedasConsulta;
       getCurrentTradingPrice(cripto, moneda)
-        .then((data) => console.log(data.DISPLAY[cripto][moneda]))
+        .then((data) => setResultado(data.DISPLAY[cripto][moneda]))
         .catch((error) =>
           console.error('Error en el uso de getCurrentTradingPrice', error)
         );
     }
   }, [monedasConsulta]);
   return (
-    <Contenedor>
-      <ImagenPortada src={imgPortada} alt={'Imagen criptomonedas'} />
-      <div>
-        <Heading>Cotizador de Criptomonedas</Heading>
-        <Formulario setMonedasConsulta={setMonedasConsulta} />
-      </div>
-    </Contenedor>
+    <>
+      <Contenedor>
+        <ImagenPortada src={imgPortada} alt={'Imagen criptomonedas'} />
+        <div>
+          <Heading>Cotizador de Criptomonedas</Heading>
+          <Formulario setMonedasConsulta={setMonedasConsulta} />
+        </div>
+      </Contenedor>
+      {resultado.PRICE && (
+        <Resultado resultado={resultado} monedasConsulta={monedasConsulta} />
+      )}
+    </>
   );
 }
 

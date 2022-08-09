@@ -11,10 +11,10 @@ const Label = styled.label`
 const Select = styled.select`
   border: none;
   outline: none;
-  padding: 14px;
+  padding: 10px;
   border-radius: 10px;
   width: 100%;
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 function useSelectMonedas(texto, coleccionMonedas) {
