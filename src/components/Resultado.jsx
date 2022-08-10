@@ -35,7 +35,7 @@ const options = {
 const labels = ['PRECIO', 'MAX-DIARIO', 'MIN-DIARIO'];
 const ContenedorResultado = styled.div`
   margin-top: 40px;
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,12 +79,14 @@ function Resultado({ resultado, monedasConsulta }) {
   return (
     <ContenedorResultado>
       <ImgCripto src={`https://www.cryptocompare.com/${IMAGEURL}`} />
-      <div style={{ width: '60%' }}>
+      <div></div>
+      <div style={{ width: '80%', alignSelf: 'center' }}>
         <Bar
           options={{
             color: 'white',
             responsive: true,
             backgroundColor: 'white',
+            maintainAspectRatio: true,
             font: { family: 'Lato' },
             scales: {
               x: {
