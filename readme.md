@@ -2,7 +2,7 @@
 
 Comprueba el precio de una criptomoneda, seleccionando el tipo de moneda y criptomoneda para los que te interesa ver su cotización
 
-<!-- ### [Desplegado con Vercel 👈👈👈](https://control-presupuesto-kappa.vercel.app/) -->
+### [Desplegado con Netlify 👈👈👈](https://remarkable-tulumba-367cab.netlify.app/)
 
 Con este proyecto lo que se pretende entender es el uso de una llamada asíncrona a un API externa mediante el uso de un formulario para seleccionar: 1. La moneda oficial en la que deseamos ver su precio (USD, USX, EUR, etc). 2. La criptomoneda (BTC, ETH, SOL, etc) de la cual quieres conocer el precio actual, maximo diario, semanal.
 Como herramienta adicional, utilizaré styled components para el diseño de la UI y la librería ChartJS para la representación de resultados.
@@ -26,5 +26,5 @@ Como herramienta adicional, utilizaré styled components para el diseño de la U
 - React
 - Vite
 - Styled components
-- Vercel
+- Netlify
 - ChartJS
