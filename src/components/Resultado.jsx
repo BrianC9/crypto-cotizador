@@ -9,28 +9,18 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels
 );
-
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart',
-    },
-  },
-};
 
 const labels = ['PRECIO', 'MAX-DIARIO', 'MIN-DIARIO'];
 const ContenedorResultado = styled.div`
@@ -102,10 +92,23 @@ function Resultado({ resultado, monedasConsulta }) {
                   color: 'white',
                   font: { family: 'Lato', size: '16px' },
                   padding: 8,
+                  callback: (label) =>
+                    `${monedasConsulta.monedaSeleccionada} ${label}`,
                 },
               },
             },
+
             plugins: {
+              datalabels: {
+                display: true,
+                color: 'white',
+                font: { size: '14', family: 'Lato', weight: 'bolder' },
+                formatter: (value) =>
+                  `${monedasConsulta.monedaSeleccionada} ${value}`,
+                anchor: 'end',
+                offset: -30,
+                align: 'start',
+              },
               title: {
                 display: true,
                 text: `Cotización diaria para ${monedasConsulta.criptoSeleccionada} en ${monedasConsulta.monedaSeleccionada}`,
@@ -116,7 +119,9 @@ function Resultado({ resultado, monedasConsulta }) {
               },
 
               legend: { display: false },
-              tooltip: { titleFont: { family: 'Lato', size: '18px' } },
+              tooltip: {
+                titleFont: { family: 'Lato', size: '18px' },
+              },
             },
           }}
           data={data}
