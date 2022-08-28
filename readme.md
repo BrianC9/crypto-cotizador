@@ -14,6 +14,7 @@ Como herramienta adicional, utilizaré styled components para el diseño de la U
 - Llamada a una API externa, mediante el uso de fetch asícnrono.
 - Representación de la respuesta obtenida, en nuestra llamada a la API
 - Gestión del asincronismo y posibles errores en la comunicación con el servicio de la API
+- Spinner para avisar al usuario que estamos procesando la petición
 - Gráfica para representar el precio actual, el maximo diario y el mínimo diario
 
 ## Referencias

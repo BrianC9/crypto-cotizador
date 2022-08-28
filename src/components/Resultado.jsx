@@ -38,9 +38,10 @@ const ImgCripto = styled.img`
   width: 120px;
   max-width: 120px;
   display: block;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
 `;
 function Resultado({ resultado, monedasConsulta }) {
-  console.log(resultado);
   const { PRICE, HIGHDAY, LOWDAY, IMAGEURL } = resultado;
   const data = {
     labels,
@@ -65,11 +66,9 @@ function Resultado({ resultado, monedasConsulta }) {
       },
     ],
   };
-  console.log('Precio', currency(PRICE));
   return (
     <ContenedorResultado>
       <ImgCripto src={`https://www.cryptocompare.com/${IMAGEURL}`} />
-      <div></div>
       <div style={{ width: '80%', alignSelf: 'center' }}>
         <Bar
           options={{
@@ -115,7 +114,7 @@ function Resultado({ resultado, monedasConsulta }) {
                 font: { family: 'Lato', size: '18px' },
                 color: 'white',
                 align: 'center',
-                padding: { bottom: 30 },
+                padding: { bottom: 50 },
               },
 
               legend: { display: false },

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import Formulario from './components/Formulario';
 import Resultado from './components/Resultado';
+import Spinner from './components/Spinner';
 import { getCurrentTradingPrice } from './data/services';
 import imgPortada from './img/imagen-criptos.png';
 const Contenedor = styled.div`
@@ -39,15 +40,27 @@ const Heading = styled.h1`
     margin: 10px auto 5px auto;
   }
 `;
+const Centrado = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+`;
 function App() {
   const [monedasConsulta, setMonedasConsulta] = useState({});
   const [resultado, setResultado] = useState({});
+  const [cargando, setCargando] = useState(false);
   useEffect(() => {
     if (Object.keys(monedasConsulta).length > 0) {
       const { monedaSeleccionada: moneda, criptoSeleccionada: cripto } =
         monedasConsulta;
+
+      setCargando(true);
       getCurrentTradingPrice(cripto, moneda)
-        .then((data) => setResultado(data.DISPLAY[cripto][moneda]))
+        .then((data) => {
+          setResultado(data.DISPLAY[cripto][moneda]);
+          setCargando(false);
+        })
         .catch((error) =>
           console.error('Error en el uso de getCurrentTradingPrice', error)
         );
@@ -62,6 +75,11 @@ function App() {
           <Formulario setMonedasConsulta={setMonedasConsulta} />
         </div>
       </Contenedor>
+      {cargando && (
+        <Centrado>
+          <Spinner />
+        </Centrado>
+      )}
       {resultado.PRICE && (
         <Resultado resultado={resultado} monedasConsulta={monedasConsulta} />
       )}
